@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html  ng-app='angularRoutingApp'>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
@@ -89,7 +89,16 @@
         });
     </script>
 </head>
-<body>
+<body ng-controller='mainController'>
+
+    <fieldset>
+        <legend>Crear Libro AngularJS</legend>
+        Nombre <input type="text" id="nombre1" /> <br />
+        Apellido <input type="text" id="apellido1" />
+        <input type="button" value="Ingresar" id="buttonLibro3"  ng-click="obtenerGet()" />
+        <br />
+        <span id="resultlibro3"></span>
+    </fieldset>
 
     <fieldset>
         <legend>Crear Libro</legend>
@@ -138,6 +147,38 @@
         <span id="result4"></span>
     </fieldset>
 
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.7/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.3/angular-route.js"></script>
+    <script type="text/javascript">
+        // Creación del módulo
+        var angularRoutingApp = angular.module('angularRoutingApp', []);
+
+        var urlServicio = "http://www.programandoconrupert.com/ws/servicio-gatos.php";
+
+        angularRoutingApp.controller("mainController", ["$scope", "$http", function ($scope, $http) {
+            $scope.gatos = [];
+            $scope.obtenerGet = function () {
+                //alert('Funciona');
+                var nombre = document.getElementById('nombre1').value;
+                var apellido = document.getElementById('apellido1').value;
+                $http({
+                    method: "GET",
+                    url: '/demo/create2/' + nombre + '&' + apellido
+                    //url: '/demo/demo1'
+                }).then(function correcto(respuesta) {
+                    //$scope.gatos = respuesta.data;
+                    var resultlibro3 = document.getElementById('resultlibro3');
+                    resultlibro3.innerHTML = respuesta.data;
+                },
+                    function error(respuesta) {
+                        alert(respuesta.statusText);
+                    });
+            };
+        }]);
+
+        
+    </script>
 </body>
 </html>
 
