@@ -12,6 +12,18 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
+            $('#buttonLibro2').click(function () {
+                var nombre = $('#nombre').val();
+                var apellido = $('#apellido').val();
+                $.ajax({
+                    type: 'GET',
+                    url: '/demo/create2/' + nombre + '&' + apellido,
+                    success: function (result) {
+                        $('#resultlibro').html(result);
+                    }
+                });
+            });
+
             $('#buttonLibro').click(function () {
                 var name = $('#name').val();
                 $.ajax({
@@ -78,6 +90,15 @@
     </script>
 </head>
 <body>
+
+    <fieldset>
+        <legend>Crear Libro</legend>
+        Nombre <input type="text" id="nombre" /> <br />
+        Apellido <input type="text" id="apellido" />
+        <input type="button" value="Ingresar" id="buttonLibro2" />
+        <br />
+        <span id="resultlibro"></span>
+    </fieldset>
 
     <fieldset>
         <legend>Crear Libro</legend>

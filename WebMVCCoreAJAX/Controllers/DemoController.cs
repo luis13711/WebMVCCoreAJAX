@@ -31,6 +31,21 @@ namespace WebMVCCoreAJAX.Controllers
             return new JsonResult("Hello");
         }
 
+        [Route("create2/{nombre}&{apellido}")]
+        public IActionResult Create2(string nombre, string apellido)
+        {
+            Book book = new Book();
+            book.Id = 0;
+            book.Name = nombre+apellido;
+
+            if (ModelState.IsValid)
+            {
+                _db.Add(book);
+                _db.SaveChanges();
+            }
+            string cadena = JsonConvert.SerializeObject(book);
+            return new JsonResult(" " + cadena);
+        }
 
         [Route("create/{name}")]
         public IActionResult Create(string name)
