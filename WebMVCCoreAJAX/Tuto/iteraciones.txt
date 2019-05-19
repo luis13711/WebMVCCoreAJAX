@@ -1,0 +1,12 @@
+﻿
+http://learningprogramming.net/net/asp-net-core-mvc/ajax-in-asp-net-core-mvc/
+
+Add-Migration Initial
+
+Update-Database
+
+agregue luego Books 
+
+add-migration updateNameProperty
+
+update-database
