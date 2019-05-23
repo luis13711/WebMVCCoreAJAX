@@ -72,6 +72,14 @@ namespace WebMVCCoreAJAX
                 app.UseHsts();
             }
 
+            app.UseCors( builder =>
+                builder
+                .WithOrigins("http://localhost:8080") //ip y puerto de proyecto destino
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials()
+            );
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
