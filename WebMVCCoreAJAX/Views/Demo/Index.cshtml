@@ -92,12 +92,21 @@
 <body ng-controller='mainController'>
 
     <fieldset>
-        <legend>Crear Libro AngularJS</legend>
-        Nombre <input type="text" id="nombre1" /> <br />
-        Apellido <input type="text" id="apellido1" />
-        <input type="button" value="Ingresar" id="buttonLibro3"  ng-click="obtenerGet()" />
-        <br />
-        <span id="resultlibro3"></span>
+        <legend>Enviar imagen con AngularJS</legend>
+        
+            <input id="filename" name="filename" type="file"  />
+            <img src="" height="200" alt="Image preview...">
+            <div>
+            </div>
+            <button ng-click="enviarImagen()">
+                Enviar Imagen
+            </button>
+        
+        <div style="display:block;"><h2>Canvas</h2></div>
+        <canvas id="micanvas" width="150" height="150" style="display:block"></canvas>
+
+        <canvas id="mipintado" width="150" height="150" style="display:block; border:10px #ccc solid;"></canvas>
+        <img id="otraimg" src="" width="150" height="150" style="display:block; border:10px #ccc solid;" />
     </fieldset>
 
     <fieldset>
@@ -156,9 +165,88 @@
 
         var urlServicio = "http://www.programandoconrupert.com/ws/servicio-gatos.php";
 
+        var RegistroImagen = {};
+
         angularRoutingApp.controller("mainController", ["$scope", "$http", function ($scope, $http) {
             $scope.gatos = [];
-            $scope.obtenerGet = function () {
+            
+        
+            $scope.enviarImagen = function () {
+                //console.log(RegistroImagen.data);
+                var cadena = RegistroImagen.data;
+                //data = JSON.stringify(data);
+
+                var data = cadena.substring(27, cadena.length -1);   
+                //console.log(cadena);
+                console.log(cadena.substring(0, 27));
+                console.log(cadena.substring(27, cadena.length -1));
+                //$http({
+                //    method: "GET",
+                //    url: '/demo/guardarImagen?data=' + data
+                    
+                //}).then(function correcto(respuesta) {
+                //    //resultlibro3.innerHTML = respuesta.data;
+                //},
+                //    function error(respuesta) {
+                //        alert(respuesta.statusText);
+                //    });
+
+                $http({
+                        url: "localhost:44308/api/Values",
+                        type: "POST",
+                        data: JSON.stringify(data),
+                        dataType: "json",
+                        contentType: "application/json",
+                        success: function (result) {
+                            //var json = JSON.stringify(result)
+                            //alert(json);
+                            
+                            var mipintado = document.getElementById("mipintado");
+                            var nuevaimg = new Image();
+                            nuevaimg.src = result;//json.data;//reader.result;//micanvas.toDataURL();
+                            var ctx2 = mipintado.getContext("2d");
+                            ctx2.drawImage(nuevaimg, 0, 0, 150, 150);
+
+                            var otraimg = document.getElementById("otraimg");
+                            otraimg.src = result;//reader.result;
+                            //var id2 = new ImageData(150, 150);//{};//ctx2.getImageData(0, 0, 150, 150);
+                            
+                        },
+                        error: function (request, status, error) {
+                            alert("Error: Could not delete" + error);
+                        }
+                    });
+
+                    //$.ajax({
+                    //    url: "GuardarImagen.ashx",
+                    //    type: "POST",
+                    //    data: JSON.stringify(this.RegistroImagen.data),//JSON.stringify(RegistroImagen),
+                    //    dataType: "json",
+                    //    contentType: "application/json",
+                    //    success: function (result) {
+                    //        //var json = JSON.stringify(result)
+                    //        //alert(json);
+                            
+                    //        var mipintado = document.getElementById("mipintado");
+                    //        var nuevaimg = new Image();
+                    //        nuevaimg.src = result;//json.data;//reader.result;//micanvas.toDataURL();
+                    //        var ctx2 = mipintado.getContext("2d");
+                    //        ctx2.drawImage(nuevaimg, 0, 0, 150, 150);
+
+                    //        var otraimg = document.getElementById("otraimg");
+                    //        otraimg.src = result;//reader.result;
+                    //        //var id2 = new ImageData(150, 150);//{};//ctx2.getImageData(0, 0, 150, 150);
+                            
+                    //    },
+                    //    error: function (request, status, error) {
+                    //        alert("Error: Could not delete" + error);
+                    //    }
+                    //});
+
+            };
+            
+            $scope.obtenerGet = function ()
+            {
                 //alert('Funciona');
                 var nombre = document.getElementById('nombre1').value;
                 var apellido = document.getElementById('apellido1').value;
@@ -177,7 +265,58 @@
             };
         }]);
 
-        
+        function previewFile()
+        {
+            var preview = document.querySelector('img');
+            var file = document.querySelector('input[type=file]').files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+                preview.src = reader.result;
+                var micanvas = document.getElementById("micanvas");
+                var ctx = micanvas.getContext("2d");
+                var miimagen = new Image();
+                miimagen.src = reader.result;
+                //console.log(reader.result);
+                RegistroImagen.data = reader.result;
+                miimagen.onload = function()
+                {
+                    /*
+                     ImageData.data Read only
+                    Is a Uint8ClampedArray representing a one-dimensional array containing the data in the RGBA order, with integer values between 0 and 255 (inclusive).
+                    ImageData.height Read only
+                    Is an unsigned long representing the actual height, in pixels, of the ImageData.
+                    ImageData.width Read only
+                    Is an unsigned long representing the actual width, in pixels, of the ImageData.
+                     */
+                    //console.log(miimagen.decode());
+                    ctx.drawImage(miimagen, 0, 0, 150, 150);
+                    var ImageData = ctx.getImageData(0, 0, 150, 150);
+                    //console.log(ImageData.data);
+                    //console.log(micanvas.toDataURL());
+
+                    //const img = new Image();
+                    //img.src = 'nebula.jpg';
+                    //img.decode();
+
+                    
+                    
+
+
+                }
+
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "";
+            }
+            }
+
+
+
+        document.getElementById('filename').addEventListener('change', previewFile, false);
     </script>
 </body>
 </html>

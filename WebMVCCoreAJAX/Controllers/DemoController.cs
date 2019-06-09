@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using WebMVCCoreAJAX.Models;
@@ -30,6 +31,15 @@ namespace WebMVCCoreAJAX.Controllers
         {
             return new JsonResult("Hello");
         }
+
+        //[Route("guardarImagen/{data}")]
+        [HttpGet("{data}")]
+        public  IActionResult guardarImagen(String data)
+        {
+            
+            return new JsonResult(" " + data);
+        }
+
 
         [Route("create2/{nombre}&{apellido}")]
         public IActionResult Create2(string nombre, string apellido)
@@ -106,4 +116,12 @@ namespace WebMVCCoreAJAX.Controllers
         }
 
     }
+
+    public class RegistroImagen
+    {
+        private string data;
+
+        public string Data { get => data; set => data = value; }
+    }
+
 }
