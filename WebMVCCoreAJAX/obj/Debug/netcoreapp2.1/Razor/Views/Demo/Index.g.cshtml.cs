@@ -44,7 +44,7 @@ namespace AspNetCore
             WriteLiteral("\r\n\r\n\r\n<!DOCTYPE html>\r\n\r\n<html  ng-app=\'angularRoutingApp\'>\r\n");
             EndContext();
             BeginContext(61, 3074, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8cf9f641bc5e47ed864faf9ac6a4b53d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8da76a335e334bc6999c3fa62e392192", async() => {
                 BeginContext(67, 87, true);
                 WriteLiteral("\r\n    <meta name=\"viewport\" content=\"width=device-width\" />\r\n    <title>Index</title>\r\n");
                 EndContext();
@@ -149,7 +149,7 @@ namespace AspNetCore
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(3137, 9386, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0d49aeae13bc4cbf9850228bb896eaf9", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0775acf836b440e49dbbe0ac11aa10bf", async() => {
                 BeginContext(3174, 9342, true);
                 WriteLiteral(@"
 

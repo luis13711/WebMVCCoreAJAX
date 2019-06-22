@@ -1,6 +1,15 @@
 ﻿
 http://learningprogramming.net/net/asp-net-core-mvc/ajax-in-asp-net-core-mvc/
 
+Mailkit
+https://www.youtube.com/watch?v=lnRBShlB9hA
+https://stackoverflow.com/questions/41160536/how-to-send-html-message-via-mimekit-mailkit
+
+Excel
+-----
+https://stackoverflow.com/questions/50247245/export-to-excel-in-asp-net-core-2-0
+
+
 Add-Migration Initial
 
 Update-Database
