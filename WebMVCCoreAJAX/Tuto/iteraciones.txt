@@ -10,6 +10,16 @@ Excel
 https://stackoverflow.com/questions/50247245/export-to-excel-in-asp-net-core-2-0
 
 
+Encriptar y desencriptar contraseña
+-----------------------------------
+https://revistadigital.inesem.es/informatica-y-tics/seguridad-en-c-encriptar-y-desencriptar-datos/
+
+Random
+-------------------------
+https://www.c-sharpcorner.com/article/how-to-generate-a-random-password-in-c-sharp-and-net-core/
+https://www.c-sharpcorner.com/UploadFile/mahesh/substring-in-C-Sharp/
+
+
 Add-Migration Initial
 
 Update-Database
