@@ -29,3 +29,11 @@ agregue luego Books
 add-migration updateNameProperty
 
 update-database
+
+---------
+dotnet 
+----------
+https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli
+dotnet ef migrations add InitialCreate
+
+dotnet ef database update

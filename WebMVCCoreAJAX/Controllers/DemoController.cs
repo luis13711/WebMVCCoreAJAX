@@ -94,7 +94,7 @@ namespace WebMVCCoreAJAX.Controllers
         [Route("demo4")]
         public IActionResult Demo4()
         {
-            var products = new List<Product>()
+            /* var products = new List<Product>()
             {
                 new Product() {
                     Id = "p01",
@@ -112,7 +112,9 @@ namespace WebMVCCoreAJAX.Controllers
                     Price = 789
                 }
             };
-            return new JsonResult(products);
+            return new JsonResult(products); */
+            var books = _db.Books.ToList();
+            return new JsonResult(books);
         }
 
     }

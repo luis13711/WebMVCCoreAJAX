@@ -3,12 +3,26 @@
 
 <!DOCTYPE html>
 
-<html  ng-app='angularRoutingApp'>
+<html  ng-app='angularRoutingApp' lang="en">
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>*@
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- Carga de fuentes de Font  Awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <!-- Carga de estilos css personalizados -->
+    <link rel="stylesheet" href="css/estilos.css">
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
     @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>*@
     <script src="js/jquery-2.2.3.min.js"></script>
+    @* <script src="js/jquery.min.js"></script> *@
+    <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -69,7 +83,7 @@
                 });
             });
 
-            $('#buttonDemo4').click(function () {
+            /*$('#buttonDemo4').click(function () {
                 $.ajax({
                     type: 'GET',
                     url: '/demo/demo4',
@@ -84,50 +98,148 @@
                         $('#result4').html(s);
                     }
                 });
+            }); 
+            */
+            $('#buttonDemo4').click(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: '/demo/demo4',
+                    success: function (result) {
+                        var s = '';
+                        for (var i = 0; i < result.length; i++) {
+                            s += '<br>Id: ' + result[i].id;
+                            s += '<br>Name: ' + result[i].name;
+                            s += '<br>------------------';
+                        }
+                        $('#result4').html(s);
+                    }
+                });
             });
-
         });
     </script>
 </head>
 <body ng-controller='mainController'>
-
-    <fieldset>
-        <legend>Enviar imagen con AngularJS</legend>
-        
-            <input id="filename" name="filename" type="file"  />
-            <img src="" height="200" alt="Image preview...">
-            <div>
+    <div class="card" style="width: 38rem;margin:auto;padding:1rem;text-align:center">
+        <div class="card-body">
+            <h5 class="card-title">Seleccione una opción</h5>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button 
+                    class="btn btn-primary" 
+                    type="button" 
+                    data-toggle="collapse" 
+                    data-target="#collapseImagen" 
+                    aria-expanded="false" 
+                    aria-controls="collapseImagen">
+                    Mostrar imagenes
+                </button>
+                <button 
+                    class="btn btn-primary" 
+                    type="button" 
+                    data-toggle="collapse" 
+                    data-target="#collapseCrearLibro" 
+                    aria-expanded="false" 
+                    aria-controls="collapseCrearLibro">
+                    Crear un libro
+                </button>
+                <button 
+                    class="btn btn-primary" 
+                    type="button" 
+                    data-toggle="collapse" 
+                    data-target="#collapseMostrarLibros" 
+                    aria-expanded="false" 
+                    aria-controls="collapseMostrarLibros">
+                    Mostrar los libros
+                </button>
             </div>
-            <button ng-click="enviarImagen()">
-                Enviar Imagen
-            </button>
+        </div>
+    </div>
+    <p>
         
-        <div style="display:block;"><h2>Canvas</h2></div>
-        <canvas id="micanvas" width="150" height="150" style="display:block"></canvas>
+    </p>
+    <div class="collapse" id="collapseImagen">
+        <div class="card card-body">
+        
+        
+        <div class="card" style="width: 30rem;margin:auto;padding:1rem;">
+            <div class="card-body">
+                <h5 class="card-title">Ejemplo de envío de imagenes</h5>
+                <fieldset>
+                    <legend>Enviar imagen con AngularJS</legend>
+                    
+                        <input id="filename" name="filename" type="file"  />
+                        <img src="" height="200" alt="Image preview...">
+                        <div>
+                        </div>
+                        <button ng-click="enviarImagen()">
+                            Enviar Imagen
+                        </button>
+                    
+                    <div style="display:block;"><h2>Canvas</h2></div>
+                    <canvas id="micanvas" width="150" height="150" style="display:block"></canvas>
 
-        <canvas id="mipintado" width="150" height="150" style="display:block; border:10px #ccc solid;"></canvas>
-        <img id="otraimg" src="" width="150" height="150" style="display:block; border:10px #ccc solid;" />
-    </fieldset>
+                    <canvas id="mipintado" width="150" height="150" style="display:block; border:10px #ccc solid;"></canvas>
+                    <img id="otraimg" src="" width="150" height="150" style="display:block; border:10px #ccc solid;" />
+                </fieldset>
+            </div>
+        </div>
+        
+        
+        </div>
+    </div>
+    <div class="collapse" id="collapseCrearLibro">
+        <div class="card card-body">
 
-    <fieldset>
-        <legend>Crear Libro</legend>
-        Nombre <input type="text" id="nombre" /> <br />
-        Apellido <input type="text" id="apellido" />
-        <input type="button" value="Ingresar" id="buttonLibro2" />
-        <br />
-        <span id="resultlibro"></span>
-    </fieldset>
+            <div class="card" style="width: 18rem;margin:auto;padding:1rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Crear libro</h5>
+                    <fieldset>
+                        Nombre <input class="form-control" type="text" id="nombre" /> <br />
+                        Apellido <input class="form-control" type="text" id="apellido" />
+                        <input type="button" value="Ingresar" id="buttonLibro2" />
+                        <br />
+                        <span id="resultlibro"></span>
+                    </fieldset>
+                </div>
+            </div>
 
-    <fieldset>
+
+        </div>
+    </div>
+    <div class="collapse" id="collapseMostrarLibros">
+        <div class="card card-body">
+        
+        <div class="card" style="width: 18rem;margin:auto;padding:1rem;">
+        
+            <div class="card-body">
+                <h5 class="card-title">Mostrar libros</h5>
+                <fieldset>
+                    <button 
+                        type="button" 
+                        class="btn btn-info"
+                        id="buttonDemo4">
+                        Mostrar libros
+                    </button>
+                    <br />
+                    <span id="result4"></span>
+                </fieldset>
+            </div>
+        </div>
+
+        </div>
+    </div>
+    
+
+    @* <fieldset>
         <legend>Crear Libro</legend>
         Nombre <input type="text" id="name" />
+        <legend>Usando jQuery</legend>
         <input type="button" value="Nombre 1" id="buttonLibro" />
         <br />
         <span id="resultlibro"></span>
-    </fieldset>
+    </fieldset> *@
 
 
-    <fieldset>
+    @* <fieldset>
         <legend>Demo 1</legend>
         <input type="button" value="Demo 1" id="buttonDemo1" />
         <br />
@@ -147,14 +259,9 @@
         <input type="button" value="Demo 3" id="buttonDemo3" />
         <br />
         <span id="result3"></span>
-    </fieldset>
-
-    <fieldset>
-        <legend>Demo 4</legend>
-        <input type="button" value="Demo 4" id="buttonDemo4" />
-        <br />
-        <span id="result4"></span>
-    </fieldset>
+    </fieldset> *@
+    
+    
 
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.7/angular.min.js"></script>
@@ -192,7 +299,7 @@
                 //    });
 
                 $http({
-                        url: "localhost:44308/api/Values",
+                        url: "/api/Values",
                         type: "POST",
                         data: JSON.stringify(data),
                         dataType: "json",
@@ -318,6 +425,7 @@
 
         document.getElementById('filename').addEventListener('change', previewFile, false);
     </script>
+    
 </body>
 </html>
 
